@@ -21,15 +21,7 @@ function main() {
   }
 
   function buildTitleScreen() {
-    titleScreenElement = createHtml(`<div class="title-screen">
-      <h1>Up or Down</h1>
-      <button>start game</button>
-      <div class="instructions">
-        <p>guess if the next number is higher or lower</p>
-        <p>3 seconds per turn</p>
-        <p>if you don't guess you suck</p>
-      </div>
-    </div>`);
+    titleScreenElement = createHtml(``);
     mainContentElement.appendChild(titleScreenElement);
     startButtonElement = titleScreenElement.querySelector('button');
     startButtonElement.addEventListener('click', handleStartClick);
