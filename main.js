@@ -45,19 +45,12 @@ function main() {
   }
   
   function buildGameScreen() {
-    gameScreenElement = createHtml(`<form id="input">
-    <input type="number" class="input-number-1">
-    <div class="operation operation1">+</div>
-    <input type="number" class="input-number-2">
-    <div id="result">24</div>
-    <button>check</button>
-    <!-- ¿¿¿¿ <input type="submit" value="Submit"> ???? -->
-  </form>`);
-    // game = new Game (mainContentElement);
-    // game.build();
+    game = new Game (mainContentElement);
+    game.build();
     // game.start();
-    mainContentElement.appendChild(gameScreenElement);
-    window.setTimeout(gameEnded, 1000);
+    // resultElement = getELementsByClassName ('operation-1');
+    // resultElement.innerText = slef.result;
+    // window.setTimeout(gameEnded, 1000);
   }
 
   function destroyGameScreen() {
