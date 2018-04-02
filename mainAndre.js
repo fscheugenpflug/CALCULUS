@@ -1,9 +1,10 @@
-// -- OVERALL
+'use strict'
+
 function createHtml(html) {
   var div = document.createElement('div');
   div.innerHTML = html;
   return div.children[0];
-};
+}
 
 
 function main() {
@@ -14,49 +15,41 @@ function main() {
   var titleScreenElement;
   var startButtonElement;
 
-  
+  function handleStartClick() {
+    destroyTitleScreen();
+    buildGameScreen();
+  }
+
   function buildTitleScreen() {
-    titleScreenElement = createHtml(`<div id="start-screen">
-    <h1>Calculus</h1>
-    <button class="button start-game">Start Game</button>
-    </div>`);
+    titleScreenElement = createHtml(``);
     mainContentElement.appendChild(titleScreenElement);
     startButtonElement = titleScreenElement.querySelector('button');
     startButtonElement.addEventListener('click', handleStartClick);
   }
-  
+
   function destroyTitleScreen() {
     titleScreenElement.remove();
     startButtonElement.removeEventListener('click', handleStartClick);
   }
-  
-  function handleStartClick() {
-    destroyTitleScreen();
-    buildGameScreen();
-  };
 
-  // -- GAME SCREEN 
+
+  // -- GAME SCREEN
 
   var game;
 
-  function gameEnded(){
+  var gameScreenElement;
+  // var upButtonElement;
+  // var downButtonElement;
+
+  function gameEnded() {
     destroyGameScreen();
     buildGameOverScreen();
   }
-  
+
   function buildGameScreen() {
-    gameScreenElement = createHtml(`<form id="input">
-    <input type="number" class="input-number-1">
-    <div class="operation operation1">+</div>
-    <input type="number" class="input-number-2">
-    <div id="result">24</div>
-    <button>check</button>
-    <!-- ¿¿¿¿ <input type="submit" value="Submit"> ???? -->
-  </form>`);
-    // game = new Game (mainContentElement);
-    // game.build();
-    // game.start();
-    mainContentElement.appendChild(gameScreenElement);
+    game = new Game(mainContentElement);
+    game.build();
+    game.start();
     window.setTimeout(gameEnded, 1000);
   }
 
@@ -64,28 +57,34 @@ function main() {
     gameScreenElement.remove();
   }
 
-  // -- GAMEOVER SCREEN 
+  // -- GAME OVER SCREEN
 
-  function buildGameOverScreen() {
-    gameOverScreenElement = createHtml(`<div id="restart-screen">
-    <h1>GameOver</h1>
-    <button class="buttton restart-game">Restart Game</button>
-  </div>`);
-    mainContentElement.appendChild(gameOverScreenElement);
-    restartGameButtonElement = gameOverScreenElement.querySelector('button');
-    restartGameButtonElement.addEventListener('click', handleRestartClick);
-  }
+  var gameOverScreenElement;
+  var restartGameButtonElement;
 
   function handleRestartClick() {
     destroyGameOverScreen();
     buildGameScreen();
   }
+
+  function buildGameOverScreen() {
+    gameOverScreenElement = createHtml(`<div class="game-over-screen">
+      <h1>Score: 55</h1>
+      <button>restart game</button>
+    </div>`);
+    mainContentElement.appendChild(gameOverScreenElement);
+    restartGameButtonElement = gameOverScreenElement.querySelector('button');
+    restartGameButtonElement.addEventListener('click', handleRestartClick);
+  }
+
   function destroyGameOverScreen() {
     gameOverScreenElement.remove();
     restartGameButtonElement.removeEventListener('click', handleRestartClick);
   }
-  // -- START THE APP
+
+  // -- start the app
 
   buildTitleScreen();
-  }
+}
+
 window.addEventListener('load', main);
