@@ -46,15 +46,14 @@ function main() {
   
   function buildGameScreen() {
     game = new Game (mainContentElement);
-    game.build();
-    // game.start();
-    // resultElement = getELementsByClassName ('operation-1');
-    // resultElement.innerText = slef.result;
-    // window.setTimeout(gameEnded, 1000);
+    game.build();  
+    game.start();
+    game.onEnded(gameEnded);
+
   }
 
   function destroyGameScreen() {
-    gameScreenElement.remove();
+    game.destroy()
   }
 
   // -- GAMEOVER SCREEN 

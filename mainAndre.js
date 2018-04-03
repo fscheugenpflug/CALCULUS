@@ -49,8 +49,8 @@ function main() {
   function buildGameScreen() {
     game = new Game(mainContentElement);
     game.build();
-    game.start();
-    window.setTimeout(gameEnded, 1000);
+    // game.start();
+    game.onEnded(gameEnded);
   }
 
   function destroyGameScreen() {
