@@ -32,9 +32,24 @@ function main() {
   
   function handleStartClick() {
     destroyTitleScreen();
-    buildGameScreen();
+    //buildGameScreen();
+    buildCountDownScreen();
   };
 
+  // -- COUNTDOWN-SCREEN
+
+  function buildCountDownScreen(){
+    countDownScreenElement = createHtml(`<div class="countdown">
+    <img src="https://thumbs.gfycat.com/RepentantFancyAlbatross-size_restricted.gif">
+  </div>`)
+    mainContentElement.appendChild(countDownScreenElement);
+    window.setTimeout(destroyCountDownScreen, 10);
+  };
+
+  function destroyCountDownScreen(){
+    countDownScreenElement.remove();
+    buildGameScreen();
+  }
   // -- GAME SCREEN 
 
   var game;
@@ -47,7 +62,6 @@ function main() {
   function buildGameScreen() {
     game = new Game (mainContentElement);
     game.build();  
-    game.start();
     game.onEnded(gameEnded);
 
   }
