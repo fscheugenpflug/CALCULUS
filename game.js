@@ -1,6 +1,6 @@
 // Constructor GAME 
 
-function Game (parentElement){
+function Game (parentElement, difficulty){
   this.values = [];
   this.parentElement = parentElement;
   this.mathOperators = ['+','-','/','*'];
@@ -16,6 +16,7 @@ function Game (parentElement){
   this.string = '';
   this.operationArray = [];
   this.inputsArray= [];
+  this.widthHealthBarInitial = 100;
 
 };
 
@@ -26,11 +27,12 @@ Game.prototype.build = function(){
   
   self.gameScreenElement = createHtml(`
   <div id="game-screen">
-  <div id="form-Game">
-  </div>
-  <div id="result"></div>
-  <button id="check">check</button>
-  <button class="over">Game Over</button>
+    <div id="form-Game">
+    </div>
+    <div class = "equal">=</div>
+    <div id="result"></div>
+    <button id="check">check</button>
+    <button class="over">Game Over</button>
   </div>
   `);
   self.divFormElement = self.gameScreenElement.querySelector('#form-Game');
@@ -58,6 +60,7 @@ Game.prototype.nextTurn = function(){
   self.divFormElement.appendChild(self.formElement);
   self.createOperations();
   self.createResult();
+  self.healthBar();
 };
 
 //FormElement 
@@ -68,6 +71,8 @@ Game.prototype.createNewForm = function() {
   self.formElement.setAttribute('id','input')
 
   function mainBody(){
+    var healthBarElement = document.createElement('div');
+    healthBarElement.setAttribute('id','my-bar')
     var inputElement1 = document.createElement('input');
     inputElement1.setAttribute('type','number');
     var divElement = document.createElement('div');
@@ -75,6 +80,7 @@ Game.prototype.createNewForm = function() {
     var inputElement2 = document.createElement('input');
     inputElement2.setAttribute('type','number');
 
+    self.formElement.appendChild(healthBarElement);
     self.formElement.appendChild(inputElement1);
     self.formElement.appendChild(divElement);
     self.formElement.appendChild(inputElement2);
@@ -96,6 +102,22 @@ Game.prototype.createNewForm = function() {
       addLevel();
     };
   };
+}
+
+Game.prototype.healthBar = function() {
+  var self = this;
+  var id = setInterval(frame, 50); // depends on the time the player will have 
+  var elem = self.bar = document.getElementById("my-bar");  
+  var width = self.widthHealthBarInitial;
+  function frame() {
+    if (width <= 1) {
+      clearInterval(id);
+      self.endCallback();
+    } else {
+      width -- ; 
+      elem.style.width = width + '%'; 
+    }
+  }
 }
 
 Game.prototype.calculateFinal = function (inputs, operations){

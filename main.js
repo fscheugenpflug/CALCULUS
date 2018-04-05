@@ -10,14 +10,45 @@ function main() {
   var mainContentElement = document.getElementById('main-content');
 
   // -- TITLE SCREEN
-
+  
   var titleScreenElement;
+  var difficulty = null;
   var startButtonElement;
 
   
   function buildTitleScreen() {
     titleScreenElement = createHtml(`<div id="start-screen">
     <h1>Calculus</h1>
+    <div class="box">
+	    <a class="button-popup" href="#popup1">Instructions</a>
+    </div>
+    <div class="box">
+      <a class="button-popup" href="#popup2">Set difficulty</a>
+    </div>
+    <div id="popup1" class="overlay">
+      <div class="popup">
+        <h2>Instructions</h2>
+        <a class="close" href="#">&times</a>
+        <div class="content">
+          The aim is to evaluate the mathematical equation correctly <br>
+          <ul> 
+          <li>to do so you will need to insert several numbers.</li>
+          <li>only if the numbers are correct you will reach the next level! </li>
+          <li>but be aware <span>THE CLOCK IS TICKING!</span></li>
+        </div>
+      </div>
+    </div>
+    <div id="popup2" class="overlay">
+      <div class="popup">
+        <h2>Set difficulty</h2>
+        <a class="close" href="#">&times</a>
+        <div class="content">
+          By inserting a number below, you will be able to set the range of the game!
+        </div>
+        <input type="number" class="range">
+        </input>
+      </div>
+    </div>
     <button class="button start-game">Start Game</button>
     </div>`);
     mainContentElement.appendChild(titleScreenElement);
@@ -26,6 +57,7 @@ function main() {
   }
   
   function destroyTitleScreen() {
+    difficulty;
     titleScreenElement.remove();
     startButtonElement.removeEventListener('click', handleStartClick);
   }
@@ -43,7 +75,7 @@ function main() {
     <img src="https://thumbs.gfycat.com/RepentantFancyAlbatross-size_restricted.gif">
   </div>`)
     mainContentElement.appendChild(countDownScreenElement);
-    window.setTimeout(destroyCountDownScreen, 10);
+    window.setTimeout(destroyCountDownScreen, 2800);
   };
 
   function destroyCountDownScreen(){
@@ -60,7 +92,7 @@ function main() {
   }
   
   function buildGameScreen() {
-    game = new Game (mainContentElement);
+    game = new Game (mainContentElement, difficulty);
     game.build();  
     game.onEnded(gameEnded);
 
