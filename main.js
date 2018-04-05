@@ -12,8 +12,9 @@ function main() {
   // -- TITLE SCREEN
   
   var titleScreenElement;
-  var difficulty = null;
   var startButtonElement;
+  var difficultyElement = null;
+  var difficulty = null;
 
   
   function buildTitleScreen() {
@@ -57,7 +58,10 @@ function main() {
   }
   
   function destroyTitleScreen() {
-    difficulty;
+    difficultyElement = document.querySelector('.range');
+    difficulty = difficultyElement.value;
+    if(difficulty === '') difficulty = 20;
+    if(difficulty > 100) difficulty = 20;
     titleScreenElement.remove();
     startButtonElement.removeEventListener('click', handleStartClick);
   }
@@ -88,7 +92,8 @@ function main() {
 
   function gameEnded(){
     destroyGameScreen();
-    buildGameOverScreen();
+    // buildGameOverScreen();
+    buildGifScreen();
   }
   
   function buildGameScreen() {
@@ -100,6 +105,20 @@ function main() {
 
   function destroyGameScreen() {
     game.destroy()
+  }
+
+  // -- GIF SCREEN
+
+  function buildGifScreen(){
+    gifScreenElement = createHtml(`<div class="gif">
+    <img src="https://ddeubel.edublogs.org/files/2016/05/dissapointment-1jtpu75.gif">
+  </div>`)
+    mainContentElement.appendChild(gifScreenElement);
+    window.setTimeout(destroyGifScreen, 3800);
+  }
+  function destroyGifScreen(){
+    gifScreenElement.remove();
+    buildGameOverScreen();
   }
 
   // -- GAMEOVER SCREEN 

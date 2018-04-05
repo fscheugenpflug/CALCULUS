@@ -2,6 +2,7 @@
 
 function Game (parentElement, difficulty){
   this.values = [];
+  this.difficulty = difficulty;
   this.parentElement = parentElement;
   this.mathOperators = ['+','-','/','*'];
   this.ix;
@@ -46,6 +47,8 @@ Game.prototype.build = function(){
     self.evaluate();
   }
   self.checkButtonElement.addEventListener('click', self.handleClick);
+
+  self.healthBar();
   };
 
 // Appendation of the FormELement 
@@ -60,7 +63,7 @@ Game.prototype.nextTurn = function(){
   self.divFormElement.appendChild(self.formElement);
   self.createOperations();
   self.createResult();
-  self.healthBar();
+  self.widthHealthBarInitial = 100;
 };
 
 //FormElement 
@@ -71,8 +74,8 @@ Game.prototype.createNewForm = function() {
   self.formElement.setAttribute('id','input')
 
   function mainBody(){
-    var healthBarElement = document.createElement('div');
-    healthBarElement.setAttribute('id','my-bar')
+    self.healthBarElem  = document.createElement('div');
+    self.healthBarElem.setAttribute('id','my-bar')
     var inputElement1 = document.createElement('input');
     inputElement1.setAttribute('type','number');
     var divElement = document.createElement('div');
@@ -80,10 +83,17 @@ Game.prototype.createNewForm = function() {
     var inputElement2 = document.createElement('input');
     inputElement2.setAttribute('type','number');
 
-    self.formElement.appendChild(healthBarElement);
+    self.formElement.appendChild(self.healthBarElem);
     self.formElement.appendChild(inputElement1);
     self.formElement.appendChild(divElement);
     self.formElement.appendChild(inputElement2);
+  };
+
+  mainBody()
+  if(self.currentLevel > 0){
+    for (idx = 1; idx <= self.currentLevel; idx++){
+      addLevel();
+    };
   };
 
   function addLevel(){
@@ -95,27 +105,18 @@ Game.prototype.createNewForm = function() {
     self.formElement.appendChild(divElement);
     self.formElement.appendChild(inputElement);
   };
-
-  mainBody()
-  if(self.currentLevel > 0){
-    for (idx = 1; idx <= self.currentLevel; idx++){
-      addLevel();
-    };
-  };
 }
 
 Game.prototype.healthBar = function() {
   var self = this;
-  var id = setInterval(frame, 50); // depends on the time the player will have 
-  var elem = self.bar = document.getElementById("my-bar");  
-  var width = self.widthHealthBarInitial;
+  var id = setInterval(frame, 100); // depends on the time the player will have 
   function frame() {
-    if (width <= 1) {
+    if (self.widthHealthBarInitial <= 1) {
       clearInterval(id);
       self.endCallback();
     } else {
-      width -- ; 
-      elem.style.width = width + '%'; 
+      self.widthHealthBarInitial -- ; 
+      self.healthBarElem.style.width = self.widthHealthBarInitial + '%'; 
     }
   }
 }
@@ -152,7 +153,7 @@ Game.prototype.evaluate = function() {
   if (evaluation === self.result){
     self.currentLevel ++;
     self.operationArray = [];
-    self.nextTurn();
+    self.nextTurn(); 
   } else {
     alert ('YOU SUCK AT MATHS! TRY AGAIN');
   };   
@@ -179,7 +180,7 @@ Game.prototype.createOperations = function (){
 
 Game.prototype.createResult = function (){
   var self =  this;
-  self.result = Math.floor(Math.random()*400);
+  self.result = Math.floor(Math.random()*Number(self.difficulty));
   if (self.result === 0){
     self.result = self.result + 1;
   } else {
@@ -192,14 +193,14 @@ Game.prototype.onEnded = function(callback){
   var self = this;
 
   self.endCallback = callback;
-  self.gameOverButton = self.gameScreenElement.querySelector('.over');
-  self.gameOverButton.addEventListener('click', self.endCallback);
+  // self.gameOverButton = self.gameScreenElement.querySelector('.over');
+  // self.gameOverButton.addEventListener('click', self.endCallback);
 };
 
 Game.prototype.destroy = function() {
   var self = this;
 
-  self.gameOverButton.removeEventListener('click', self.endCallback);
+  // self.gameOverButton.removeEventListener('click', self.endCallback);
   self.checkButtonElement.removeEventListener('click', self.handleClick);
   self.gameScreenElement.remove()
 };
