@@ -19,7 +19,7 @@ function main() {
   
   function buildTitleScreen() {
     titleScreenElement = createHtml(`<div id="start-screen" class="img-clip-block">
-    <h1>Calculus</h1>
+    <h1>What the fuck am I doing?</h1>
     <div class="box">
 	    <a class="button-popup" href="#popup1">Instructions</a>
     </div>

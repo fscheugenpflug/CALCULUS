@@ -128,7 +128,6 @@ Game.prototype.healthBar = function() {
 Game.prototype.calculateFinal = function (inputs, operations){
   var self = this;
   self.inputs = self.formElement.querySelectorAll('input');
-  console.log(self.inputs);
   for (var idx = 0; idx < self.inputs.length; idx ++){
     var value = self.inputs[idx].value;
     self.inputsArray.push(value);
@@ -146,28 +145,34 @@ Game.prototype.calculateFinal = function (inputs, operations){
 
 Game.prototype.evaluate = function() {
   var self = this;
-  
+  var isValidOperation = true 
+
   for (var idx=0; idx < self.inputsArray.length; idx++){
     if (self.inputsArray[idx] == ''){
       alert ('Numbers missing');
+      isValidOperation =  false;
     };
-  var evaluation = eval(self.string);
+  };
+
+  if(isValidOperation){
+    var evaluation = eval(self.string)
   };
   
-  if (evaluation === self.result){
+  if (evaluation === self.result && isValidOperation){
     self.currentLevel ++;
     self.operationArray = [];
     self.nextTurn(); 
-  } else {
-    alert ('YOU SUCK AT MATHS! TRY AGAIN');
-  };   
+  } else if (isValidOperation) {
+      alert ('YOU SUCK AT MATHS! TRY AGAIN');
+    } 
+   
+
   if (self.currentLevel === 3){
-    self.operationArray = [];
     self.endCallback();
   };
   self.inputsArray =[];
   self.string ='';
-}
+};
 
 Game.prototype.createOperations = function (){
   var self = this;

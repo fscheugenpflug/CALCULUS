@@ -114,7 +114,7 @@ span {
   color: #333;
 }
 .popup .close:hover {
-  color: orange;
+  color: rgba(0, 66, 37, 0.4);
 }
 .popup .content {
   max-height: 30%;
@@ -139,7 +139,7 @@ span {
 
 #form-Game{
   margin: 0 auto;
-  margin-top: 15%;
+  margin-top: 8%;
   display: flex;
   justify-content: center;
   align-items: center;
