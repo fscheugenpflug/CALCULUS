@@ -80,7 +80,7 @@ function main() {
     <img src="https://thumbs.gfycat.com/RepentantFancyAlbatross-size_restricted.gif">
   </div>`)
     mainContentElement.appendChild(countDownScreenElement);
-    window.setTimeout(destroyCountDownScreen, 1);
+    window.setTimeout(destroyCountDownScreen, 2800);
   };
 
   function destroyCountDownScreen(){
