@@ -77,7 +77,7 @@ function main() {
 
   function buildCountDownScreen(){
     countDownScreenElement = createHtml(`<div class="gif">
-    <img src="https://thumbs.gfycat.com/RepentantFancyAlbatross-size_restricted.gif">
+    <img src="images/RepentantFancyAlbatross-size_restricted.gif">
   </div>`)
     mainContentElement.appendChild(countDownScreenElement);
     window.setTimeout(destroyCountDownScreen, 2800);
@@ -112,7 +112,7 @@ function main() {
 
   function buildGifScreen(){
     gifScreenElement = createHtml(`<div class="gif">
-    <img src="https://ddeubel.edublogs.org/files/2016/05/dissapointment-1jtpu75.gif">
+    <img src="images/dissapointment-1jtpu75.gif">
   </div>`)
     mainContentElement.appendChild(gifScreenElement);
     window.setTimeout(destroyGifScreen, 3800);
