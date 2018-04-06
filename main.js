@@ -18,7 +18,7 @@ function main() {
 
   
   function buildTitleScreen() {
-    titleScreenElement = createHtml(`<div id="start-screen">
+    titleScreenElement = createHtml(`<div id="start-screen" class="img-clip-block">
     <h1>Calculus</h1>
     <div class="box">
 	    <a class="button-popup" href="#popup1">Instructions</a>
@@ -50,8 +50,9 @@ function main() {
         </input>
       </div>
     </div>
-    <button class="button start-game">Start Game</button>
-    </div>`);
+    <button class="button start-game"><h2>Start Game</h2></button>
+    </div>
+    `);
     mainContentElement.appendChild(titleScreenElement);
     startButtonElement = titleScreenElement.querySelector('button');
     startButtonElement.addEventListener('click', handleStartClick);
@@ -75,11 +76,11 @@ function main() {
   // -- COUNTDOWN-SCREEN
 
   function buildCountDownScreen(){
-    countDownScreenElement = createHtml(`<div class="countdown">
+    countDownScreenElement = createHtml(`<div class="gif">
     <img src="https://thumbs.gfycat.com/RepentantFancyAlbatross-size_restricted.gif">
   </div>`)
     mainContentElement.appendChild(countDownScreenElement);
-    window.setTimeout(destroyCountDownScreen, 2800);
+    window.setTimeout(destroyCountDownScreen, 1);
   };
 
   function destroyCountDownScreen(){
@@ -100,9 +101,9 @@ function main() {
     game = new Game (mainContentElement, difficulty);
     game.build();  
     game.onEnded(gameEnded);
-
+    
   }
-
+  
   function destroyGameScreen() {
     game.destroy()
   }
@@ -126,7 +127,7 @@ function main() {
   function buildGameOverScreen() {
     gameOverScreenElement = createHtml(`<div id="restart-screen">
     <h1>GameOver</h1>
-    <button class="buttton restart-game">Restart Game</button>
+    <button class="button restart-game">Restart Game</button>
   </div>`);
     mainContentElement.appendChild(gameOverScreenElement);
     restartGameButtonElement = gameOverScreenElement.querySelector('button');

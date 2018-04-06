@@ -1,23 +1,57 @@
 body {
-  
+  font-family: 'Anton', 'Fjalla One', arial, sans-serif;
+}
+h1 {
+font-size: 5.5em;
+text-align: center;
+margin-bottom: 25px;
 }
 
-
-
-
-#my-bar {
-  width: 1%;
-  height: 30px;
-  background-color: green;
+.button {
+  width: 40vh;
+  height: 10%;
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #004225;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Anton', 'Fjalla One', arial, sans-serif;
+  font-size: 1em; 
 }
+
+input {
+  padding: 10px;
+  margin: 1.5% auto;
+  border: 1.5px solid #333;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Anton', 'Fjalla One', arial, sans-serif;
+
+}
+
 
 /* START-SCREEN */
+
 /* Pop Up */
+
+.range{
+  border-color: #386; 
+  margin: 5% auto;
+}
+span {
+  font-weight: bolder;  
+  font-size: 1.2em;
+  color: crimson
+}
 .box {
   width: 40%;
   margin: 0 auto;
   background: rgba(255,255,255,0.2);
-  padding: 35px;
+  padding: 25px;
   border: 2px solid #fff;
   /* border-radius: 20px/50px; */
   background-clip: padding-box;
@@ -27,15 +61,15 @@ body {
 .button-popup {
   font-size: 1em;
   padding: 10px;
-  color:grey;
-  border: 2px solid orange;
+  color:lightgrey;
+  background-color: rgba(0, 66, 37, 0.4);
   /* border-radius: 3px; */
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease-out;
 }
 .button:hover {
-  background: orange;
+  background: white;
 }
 
 .overlay {
@@ -55,7 +89,7 @@ body {
 }
 
 .popup {
-  margin: 70px auto;
+  margin: 20% auto;
   padding: 20px;
   background: #fff;
   border-radius: 2px;
@@ -87,3 +121,55 @@ body {
   overflow: auto;
 }
 
+/* CountDownScreen */
+
+.gif {
+  margin: 10% auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* GameScreen */
+
+#health-bar {
+  width: 30%;
+  height: 20px;
+  background-color:  #004225;
+}
+
+#form-Game{
+  margin: 0 auto;
+  margin-top: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.operations{
+  margin: 0.8% auto;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+.input-game-screen {
+  margin: 0.8% auto;
+}
+.equal-img {
+  max-width: 2vh;
+  margin: 0.8% auto;
+  display: flex;
+  justify-content: center;
+}
+#result{
+  font-size: 1.4em;
+  font-weight: bolder; 
+  text-align: center;
+  margin-top: 0.8%;
+}
+
+/* GameOverScreen */
+
+#restart-screen {
+  margin:15% auto;
+}

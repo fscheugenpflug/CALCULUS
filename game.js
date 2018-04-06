@@ -28,12 +28,13 @@ Game.prototype.build = function(){
   
   self.gameScreenElement = createHtml(`
   <div id="game-screen">
+    <div id="health-bar"></div>
     <div id="form-Game">
     </div>
-    <div class = "equal">=</div>
+    <div class = "equal"><img src="images/equal.svg" alt="=" class="equal-img"></div>
     <div id="result"></div>
-    <button id="check">check</button>
-    <button class="over">Game Over</button>
+    <button id="check" class="button check">check</button>
+    <!--<button class="over">Game Over</button>>
   </div>
   `);
   self.divFormElement = self.gameScreenElement.querySelector('#form-Game');
@@ -41,15 +42,15 @@ Game.prototype.build = function(){
   self.checkButtonElement = self.gameScreenElement.querySelector('#check');
   self.parentElement.appendChild(self.gameScreenElement);
   self.nextTurn();
-
+  
   self.handleClick = function() {
     self.calculateFinal();
     self.evaluate();
   }
   self.checkButtonElement.addEventListener('click', self.handleClick);
-
+  self.healthBarElem = self.gameScreenElement.querySelector('#health-bar')
   self.healthBar();
-  };
+};
 
 // Appendation of the FormELement 
 
@@ -72,18 +73,20 @@ Game.prototype.createNewForm = function() {
   var self = this;
   self.formElement = document.createElement('form');
   self.formElement.setAttribute('id','input')
-
+  
   function mainBody(){
-    self.healthBarElem  = document.createElement('div');
-    self.healthBarElem.setAttribute('id','my-bar')
+    // self.healthBarElem  = document.createElement('div');
+    // self.healthBarElem.setAttribute('id','health-bar')
     var inputElement1 = document.createElement('input');
     inputElement1.setAttribute('type','number');
+    inputElement1.setAttribute('class','input-game-screen');
     var divElement = document.createElement('div');
     divElement.setAttribute('class', 'operations');
     var inputElement2 = document.createElement('input');
     inputElement2.setAttribute('type','number');
+    inputElement2.setAttribute('class','input-game-screen');
 
-    self.formElement.appendChild(self.healthBarElem);
+    // self.formElement.appendChild(self.healthBarElem);
     self.formElement.appendChild(inputElement1);
     self.formElement.appendChild(divElement);
     self.formElement.appendChild(inputElement2);
@@ -101,6 +104,7 @@ Game.prototype.createNewForm = function() {
     divElement.setAttribute('class', 'operations');
     var inputElement = document.createElement('input');
     inputElement.setAttribute('type','number');
+    inputElement.setAttribute('class','input-game-screen');
 
     self.formElement.appendChild(divElement);
     self.formElement.appendChild(inputElement);
